@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ComposeActivity">
+
+    <EditText
+        android:id="@+id/et_simple"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        tools:layout_editor_absoluteY="3dp"
+        tools:text="Compose Tweet..." />
+
+    <Button
+        android:id="@+id/bTweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/et_simple"
+        android:text="Tweet"
+        tools:layout_editor_absoluteX="294dp"
+        tools:layout_editor_absoluteY="46dp"
+        android:onClick="onSubmit"/>
+
+</RelativeLayout>
