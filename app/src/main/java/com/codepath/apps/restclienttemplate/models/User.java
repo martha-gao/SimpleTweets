@@ -17,6 +17,7 @@ public class User {
     public User() {
     }
 
+
     // deserialize the JSON
     public static User fromJSON(JSONObject json) throws JSONException {
         User user = new User();
@@ -24,7 +25,7 @@ public class User {
         // extract and fill out values
         user.name = json.getString("name");
         user.uid = json.getLong("id");
-        user.screenName = json.getString("screen_name");
+        user.screenName = "@" + json.getString("screen_name");
         user.profileImageUrl = json.getString("profile_image_url");
 
         return user;

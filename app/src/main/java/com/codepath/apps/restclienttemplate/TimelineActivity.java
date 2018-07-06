@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -17,6 +16,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -112,7 +112,7 @@ public class TimelineActivity extends AppCompatActivity {
         i.putExtra("username", "foobar");
         i.putExtra("in_reply_to", "george");
         i.putExtra("code", 400);
-        startActivity(i); // brings up the second activity
+        startActivityForResult(i, REQUEST_CODE); // brings up the second activity
     }
 
     // REQUEST_CODE can be any value we like, used to determine the result type later
@@ -123,15 +123,16 @@ public class TimelineActivity extends AppCompatActivity {
         i.putExtra("mode", 2); // pass arbitrary data to launched activity
         startActivityForResult(i, REQUEST_CODE); // ForResult passes data back
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             // Extract name value from result extras
-            String name = data.getExtras().getString("name");
-            int code = data.getExtras().getInt("code", 0);
-            // Toast the name to display temporarily on screen
-            Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+            Tweet newTweet = Parcels.unwrap(data.getParcelableExtra("new_tweet"));
+            tweets.add(0, newTweet);
+            tweetAdapter.notifyItemChanged(0);
+            rvTweets.scrollToPosition(0);
         }
     }
 
